@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -7,7 +8,17 @@ public class Test {
 
     public enum DIRECTION {LEFT, RIGHT, UP, DOWN};
 
+    private Stack<Integer> s1 = new Stack<>();
+    private Stack<Integer> s2 = new Stack<>();
+    private Stack<Integer> curStack = s1;
+
     public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("0001234");
+
+        Stack<Integer> s = new Stack();
 
     }
 
