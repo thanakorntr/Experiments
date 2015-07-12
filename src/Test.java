@@ -1,4 +1,4 @@
-import java.util.BitSet;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,7 +15,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        BitSet b1 = new BitSet();
+        int[] a = new int[2];
+        a[0] = 3;
+        a[1] = 2;
+        int[] b = a;
+        b[0] = 1;
+        System.out.println(Arrays.toString(a));
 
 
     }
