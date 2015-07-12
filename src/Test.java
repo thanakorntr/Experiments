@@ -18,7 +18,9 @@ public class Test {
 
         sb.append("0001234");
 
-        Stack<Integer> s = new Stack();
+        sb.deleteCharAt(sb.length()-1);
+
+        System.out.println(sb.toString());
 
     }
 

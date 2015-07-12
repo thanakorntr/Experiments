@@ -7,12 +7,6 @@ import java.util.Queue;
  * Created by Thanakorn on 6/4/15.
  */
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}
 
 public class BinaryTreeLevelOrderTraversal {
 
