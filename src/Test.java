@@ -1,3 +1,4 @@
+import java.util.BitSet;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,13 +15,8 @@ public class Test {
 
     public static void main(String[] args) {
 
-        StringBuilder sb = new StringBuilder();
+        BitSet b1 = new BitSet();
 
-        sb.append("0001234");
-
-        sb.deleteCharAt(sb.length()-1);
-
-        System.out.println(sb.toString());
 
     }
 
