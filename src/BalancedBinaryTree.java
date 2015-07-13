@@ -6,15 +6,6 @@ import java.util.Map;
  */
 public class BalancedBinaryTree {
 
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public boolean isBalanced(TreeNode root) {
         Map<TreeNode, Integer> memo = new HashMap<>();
         return isBalancedHelper(root, memo);
