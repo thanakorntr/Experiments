@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,12 +14,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] a = new int[2];
-        a[0] = 3;
-        a[1] = 2;
-        int[] b = a;
-        b[0] = 1;
-        System.out.println(Arrays.toString(a));
+        String s = "Thanakorn";
+
+        for (int i = 1; i <= s.length(); i++) {
+            String subStr = s.substring(0, i);
+            System.out.println(subStr);
+        }
 
 
     }
