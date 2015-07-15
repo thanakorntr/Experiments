@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,14 +15,15 @@ public class Test {
 
     public static void main(String[] args) {
 
-        String s = "Thanakorn";
+        ListNode n1 = new ListNode(1);
 
-        for (int i = 1; i <= s.length(); i++) {
-            String subStr = s.substring(0, i);
-            System.out.println(subStr);
-        }
+        List<ListNode> l = new ArrayList<>();
 
+        l.add(n1);
 
+        n1.val = 10;
+
+        l.forEach(x -> System.out.println(x.val));
     }
 
 
