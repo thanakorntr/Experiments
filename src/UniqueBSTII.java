@@ -11,6 +11,12 @@ public class UniqueBSTII {
 
     public static List<TreeNode> generateTrees(int n) {
 
+        if (n < 1) {
+            List<TreeNode> ans = new ArrayList<>();
+            ans.add(null);
+            return ans;
+        }
+
         Map<Integer, Map<Integer, List<TreeNode>>> memo = new HashMap<>();
         for (int i = 0; i <= n+1; i++) {
             memo.put(i, new HashMap<>());
@@ -24,7 +30,6 @@ public class UniqueBSTII {
         List<TreeNode> treeNodes = new ArrayList<>();
 
         if (start == end) {
-            memo.get(start).put(end, Arrays.asList(new TreeNode(start)));
             treeNodes.add(new TreeNode(start));
             return treeNodes;
         }
@@ -67,8 +72,8 @@ public class UniqueBSTII {
                 if (memo.get(start).containsKey(i-1)) {
                     leftSubTrees = memo.get(start).get(i-1);
                 } else {
-                    leftSubTrees = generateTreesHelper(start, end-1, memo);
-                    memo.get(start).put(end-1, leftSubTrees);
+                    leftSubTrees = generateTreesHelper(start, i-1, memo);
+                    memo.get(start).put(i-1, leftSubTrees);
                 }
 
                 List<TreeNode> rightSubTrees;
