@@ -1,4 +1,4 @@
-package AdaBoost;
+package AdaBoost.FMLassignment;
 
 import java.io.*;
 import java.util.Arrays;

@@ -15,15 +15,18 @@ public class Test {
 
     public static void main(String[] args) {
 
-        ListNode n1 = new ListNode(1);
+        List<Integer> l1 = null;
+        int s = 10;
+        for (int i = 3; i >= 0; i--) {
+            List<Integer> tmp = new ArrayList<>();
+            tmp.add(i);
+            if (i == 2) {
+                s = i;
+                l1 = tmp;
+            }
+        }
 
-        List<ListNode> l = new ArrayList<>();
-
-        l.add(n1);
-
-        n1.val = 10;
-
-        l.forEach(x -> System.out.println(x.val));
+        System.out.println(l1);
     }
 
 

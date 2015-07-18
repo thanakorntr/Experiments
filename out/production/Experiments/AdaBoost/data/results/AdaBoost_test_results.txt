@@ -1,0 +1,4 @@
+Average test error for T = 100 is 0.29569999999999996 with std = 0.006848357467305579
+Average test error for T = 200 is 0.30189999999999995 with std = 0.00292308816911917
+Average test error for T = 500 is 0.30910000000000004 with std = 0.0021832697191750436
+Average test error for T = 1000 is 0.3131 with std = 0.003446415206816758

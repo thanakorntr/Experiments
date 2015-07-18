@@ -1,4 +1,4 @@
-package AdaBoost;
+package AdaBoost.FMLassignment;
 
 public class classifier {
 

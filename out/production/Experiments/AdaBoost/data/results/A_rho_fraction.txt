@@ -1,0 +1,10 @@
+Theta = 9.765625E-4, fraction of training points with margin less than or equal to theta is 0.24597701149425288
+Theta = 0.001953125, fraction of training points with margin less than or equal to theta is 0.24689655172413794
+Theta = 0.00390625, fraction of training points with margin less than or equal to theta is 0.24183908045977012
+Theta = 0.0078125, fraction of training points with margin less than or equal to theta is 0.24
+Theta = 0.015625, fraction of training points with margin less than or equal to theta is 0.25057471264367814
+Theta = 0.03125, fraction of training points with margin less than or equal to theta is 0.27632183908045976
+Theta = 0.0625, fraction of training points with margin less than or equal to theta is 0.33241379310344826
+Theta = 0.125, fraction of training points with margin less than or equal to theta is 0.5788505747126437
+Theta = 0.25, fraction of training points with margin less than or equal to theta is 1.0
+Theta = 0.5, fraction of training points with margin less than or equal to theta is 1.0
