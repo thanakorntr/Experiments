@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,18 +15,27 @@ public class Test {
 
     public static void main(String[] args) {
 
-        List<Integer> l1 = null;
-        int s = 10;
-        for (int i = 3; i >= 0; i--) {
-            List<Integer> tmp = new ArrayList<>();
-            tmp.add(i);
-            if (i == 2) {
-                s = i;
-                l1 = tmp;
+        int[][] m = new int[3][3];
+        int c = 1;
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                m[row][col] = c++;
             }
         }
 
-        System.out.println(l1);
+        double[][] temp = new double[m[0].length][m.length];
+        for (int i = 0; i < m.length; i++){
+            for (int j = 0; j < m[0].length; j++){
+                temp[j][i] = m[i][j];
+            }
+        }
+
+        for (int row = 0; row < 3; row++) {
+            System.out.println(Arrays.toString(m[row]));
+        }
+        for (int row = 0; row < 3; row++) {
+            System.out.println(Arrays.toString(temp[row]));
+        }
     }
 
 
