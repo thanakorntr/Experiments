@@ -49,6 +49,7 @@ public class AdaBoost {
             double alpha = curWeakClassifier.alpha;
             int dimension = curWeakClassifier.dimension;
             double threshold = curWeakClassifier.threshold;
+
             if (curWeakClassifier.direction == false) {  // classify feat value < threshold as -1
                  if (features[dimension] < threshold) {  // classify -1
                      sum -= alpha;
@@ -92,7 +93,6 @@ public class AdaBoost {
             }
             System.out.println("Distribution sum after round " + t + ": " + dSum);
         }
-
     }
 
     private void updateDistribution(double[][] features, double[] labels, double[] distribution, WeakClassifier baseClassifier) {
@@ -100,7 +100,6 @@ public class AdaBoost {
         double alpha = baseClassifier.alpha;
         double normalizingFactor = baseClassifier.normalizingFactor;
         int dimension = baseClassifier.dimension;
-
 
         for (int trainingDatumID = 0; trainingDatumID < features.length; trainingDatumID++) {
             if (baseClassifier.direction == false) {  // classify feat value < threshold as -1
@@ -117,7 +116,7 @@ public class AdaBoost {
                         distribution[trainingDatumID] = distribution[trainingDatumID] * Math.exp(alpha) / normalizingFactor;
                     }
                 }
-            } else {  // classify feat value < threshold as +1
+            } else if (baseClassifier.direction == true){  // classify feat value < threshold as +1
                 if (features[trainingDatumID][dimension] < threshold) {  // classify as +1
                     if (labels[trainingDatumID] == 1) {  // correctly classified
                         distribution[trainingDatumID] = distribution[trainingDatumID] * Math.exp(-alpha) / normalizingFactor;
@@ -189,8 +188,12 @@ public class AdaBoost {
         }
 
         baseClassifier.error = smallestError;
-        baseClassifier.alpha = 0.5 * Math.log((1 - smallestError) / smallestError);
-        baseClassifier.normalizingFactor = 2 * Math.sqrt(smallestError * (1 - smallestError));
+        baseClassifier.normalizingFactor = 2 * Math.sqrt(smallestError * (1D - smallestError));
+        baseClassifier.alpha = 0.5 * Math.log((1D - smallestError) / smallestError);
+        if (baseClassifier.alpha < 0) {
+            System.err.println("Error: alpha < 0");
+            System.exit(1);
+        }
         return baseClassifier;
     }
 

@@ -17,7 +17,7 @@ public class AdaBoostMAIN {
     private static double[][] features = new double[numData][featDimension];
     private static double[] labels = new double[numData];
 
-    private static int numIterations = 200;
+    private static int numIterations = 50;
 
     public static void main(String[] args) {
 
