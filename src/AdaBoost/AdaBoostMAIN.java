@@ -8,38 +8,57 @@ import java.io.FileReader;
  */
 public class AdaBoostMAIN {
 
-    private static final String trainingMatrixFilePath = "/Users/Thanakorn/IdeaProjects/Experiments/src/AdaBoost/data/instance_matrix_train.txt";
+    private static final String trainingFeaturesFilePath = "/Users/Thanakorn/IdeaProjects/Experiments/src/AdaBoost/data/instance_matrix_train.txt";
     private static final String trainingLabelsFilePath = "/Users/Thanakorn/IdeaProjects/Experiments/src/AdaBoost/data/label_train.txt";
+    private static final String testFeaturesFilePath = "/Users/Thanakorn/IdeaProjects/Experiments/src/AdaBoost/data/instance_matrix_test.txt";
+    private static final String testLabelsFilePath = "/Users/Thanakorn/IdeaProjects/Experiments/src/AdaBoost/data/label_test.txt";
+
 
     private static int featDimension = 60;
-    private static int numData = 2175;
+    private static int numTrainingData = 2175;
+    private static int numTestData = 1000;
 
-    private static double[][] features = new double[numData][featDimension];
-    private static double[] labels = new double[numData];
+    private static double[][] trainingFeatures = new double[numTrainingData][featDimension];
+    private static double[] trainingLabels = new double[numTrainingData];
+    private static double[][] testFeatures = new double[numTestData][featDimension];
+    private static double[] testLabels = new double[numTestData];
 
-    private static int numIterations = 200;
+    private static int numIterations = 55;
 
     public static void main(String[] args) {
 
-        loadFeatureMatrix();
+        loadFeatures();
         loadLabels();
 
         AdaBoost adaBoost = new AdaBoost();
-        adaBoost.train(features, labels, numIterations);
-        adaBoost.displayAccuracy(features, labels);
+        adaBoost.train(trainingFeatures, trainingLabels, numIterations);
+        adaBoost.displayAccuracy(trainingFeatures, trainingLabels);
+        adaBoost.displayAccuracy(testFeatures, testLabels);
 
     }
 
-    public static void loadFeatureMatrix() {
+    public static void loadFeatures() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(trainingMatrixFilePath));
+            BufferedReader br = new BufferedReader(new FileReader(trainingFeaturesFilePath));
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
                 String[] featVals = line.split("\t");
                 int j = 0;
                 for (String featVal : featVals) {
-                    features[i][j] = Double.parseDouble(featVal);
+                    trainingFeatures[i][j] = Double.parseDouble(featVal);
+                    j++;
+                }
+                i++;
+            }
+
+            br = new BufferedReader(new FileReader(testFeaturesFilePath));
+            i = 0;
+            while ((line = br.readLine()) != null) {
+                String[] featVals = line.split("\t");
+                int j = 0;
+                for (String featVal : featVals) {
+                    testFeatures[i][j] = Double.parseDouble(featVal);
                     j++;
                 }
                 i++;
@@ -54,17 +73,19 @@ public class AdaBoostMAIN {
             BufferedReader br = new BufferedReader(new FileReader(trainingLabelsFilePath));
             String line;
             int i = 0;
-            int pos = 0;
-            int neg = 0;
             while ((line = br.readLine()) != null) {
                 double label = Double.parseDouble(line);
-                if (label == 1) pos++;
-                if (label == -1) neg++;
-                labels[i] = label;
+                trainingLabels[i] = label;
                 i++;
             }
-            System.out.println("Num positive label: " + pos);
-            System.out.println("Num negative label: " + neg);
+
+            br = new BufferedReader(new FileReader(testLabelsFilePath));
+            i = 0;
+            while ((line = br.readLine()) != null) {
+                double label = Double.parseDouble(line);
+                testLabels[i] = label;
+                i++;
+            }
         } catch (Exception e) {
 
         }
