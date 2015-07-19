@@ -17,7 +17,7 @@ public class AdaBoostMAIN {
     private static double[][] features = new double[numData][featDimension];
     private static double[] labels = new double[numData];
 
-    private static int numIterations = 50;
+    private static int numIterations = 200;
 
     public static void main(String[] args) {
 
@@ -54,11 +54,17 @@ public class AdaBoostMAIN {
             BufferedReader br = new BufferedReader(new FileReader(trainingLabelsFilePath));
             String line;
             int i = 0;
+            int pos = 0;
+            int neg = 0;
             while ((line = br.readLine()) != null) {
                 double label = Double.parseDouble(line);
+                if (label == 1) pos++;
+                if (label == -1) neg++;
                 labels[i] = label;
                 i++;
             }
+            System.out.println("Num positive label: " + pos);
+            System.out.println("Num negative label: " + neg);
         } catch (Exception e) {
 
         }

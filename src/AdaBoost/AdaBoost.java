@@ -16,10 +16,6 @@ class WeakClassifier {
     public double alpha;
     public double normalizingFactor;
 
-    public WeakClassifier(){
-
-    }
-
     public WeakClassifier(double threshold, boolean direction, int dimension){
         this.threshold = threshold;
         this.direction = direction;
@@ -29,7 +25,7 @@ class WeakClassifier {
 
 public class AdaBoost {
 
-    // m training data with n features
+    // features[m][n]: m training data with n features
 
     private List<WeakClassifier> weakClassifiers;
 
@@ -56,7 +52,7 @@ public class AdaBoost {
                  } else {  // classify +1
                      sum += alpha;
                  }
-            } else {  // classify feat value < threshold as +1
+            } else if (curWeakClassifier.direction == true){  // classify feat value < threshold as +1
                 if (features[dimension] < threshold) {  // classify +1
                     sum += alpha;
                 } else {  // classify -1
@@ -77,7 +73,7 @@ public class AdaBoost {
         Arrays.fill(distribution, 1D / features.length);
 
         for (int t = 1; t <= numIterations; t++) {
-            WeakClassifier baseClassifier = getBaseClassifier(sortedFeatures, labels, distribution);
+            WeakClassifier baseClassifier = getBaseClassifier(features, sortedFeatures, labels, distribution);
             weakClassifiers.add(baseClassifier);
 
             if (baseClassifier.error > 0.5) {
@@ -93,6 +89,65 @@ public class AdaBoost {
             }
             System.out.println("Distribution sum after round " + t + ": " + dSum);
         }
+    }
+
+    /**
+     *
+     * @param sortedFeatures: n (feature dimension) x m (number of training data)
+     * @return
+     */
+    private WeakClassifier getBaseClassifier(double[][] features, double[][] sortedFeatures, double[] labels, double[] distribution) {
+        WeakClassifier baseClassifier = null;
+        double smallestError = Double.MAX_VALUE;
+
+        for (int n = 0; n < sortedFeatures.length; n++) {
+            for (int m = 1; m < sortedFeatures[n].length; m++) {
+                if (sortedFeatures[n][m] != sortedFeatures[n][m-1]) {
+                    double threshold = (sortedFeatures[n][m] + sortedFeatures[n][m-1]) / 2;
+
+                    WeakClassifier c1 = new WeakClassifier(threshold, false, n);  // classify point with value < threshold as -1
+                    double c1Error = 0;
+                    for (int trainingDatumID = 0; trainingDatumID < sortedFeatures[n].length; trainingDatumID++) {
+                        if (features[trainingDatumID][n] < threshold) { // classify -1
+                            if (labels[trainingDatumID] == 1) {
+                                c1Error += distribution[trainingDatumID];
+                            }
+                        } else {  // classify +1
+                            if (labels[trainingDatumID] == -1) {
+                                c1Error += distribution[trainingDatumID];
+                            }
+                        }
+                    }
+                    if (c1Error < smallestError) {
+                        baseClassifier = c1;
+                        smallestError = c1Error;
+                    }
+
+                    WeakClassifier c2 = new WeakClassifier(threshold, true, n);  // classify point with value < threshold as +1
+                    double c2Error = 0;
+                    for (int trainingDatumID = 0; trainingDatumID < sortedFeatures[n].length; trainingDatumID++) {
+                        if (features[trainingDatumID][n] < threshold) { // classify +1
+                            if (labels[trainingDatumID] == -1) {
+                                c2Error += distribution[trainingDatumID];
+                            }
+                        } else {  // classify -1
+                            if (labels[trainingDatumID] == 1) {
+                                c2Error += distribution[trainingDatumID];
+                            }
+                        }
+                    }
+                    if (c2Error < smallestError) {
+                        baseClassifier = c2;
+                        smallestError = c2Error;
+                    }
+                }
+            }
+        }
+
+        baseClassifier.error = smallestError;
+        baseClassifier.normalizingFactor = 2 * Math.sqrt(smallestError * (1D - smallestError));
+        baseClassifier.alpha = 0.5 * Math.log((1D - smallestError) / smallestError);
+        return baseClassifier;
     }
 
     private void updateDistribution(double[][] features, double[] labels, double[] distribution, WeakClassifier baseClassifier) {
@@ -134,69 +189,6 @@ public class AdaBoost {
         }
     }
 
-    /**
-     *
-     * @param sortedFeatures: n (feature dimension) x m (number of training data)
-     * @return
-     */
-    private WeakClassifier getBaseClassifier(double[][] sortedFeatures, double[] labels, double[] distribution) {
-        WeakClassifier baseClassifier = null;
-        double smallestError = Double.MAX_VALUE;
-
-        for (int n = 0; n < sortedFeatures.length; n++) {
-            for (int m = 1; m < sortedFeatures[n].length; m++) {
-                if (sortedFeatures[n][m] != sortedFeatures[n][m-1]) {
-                    double threshold = (sortedFeatures[n][m] + sortedFeatures[n][m-1]) / 2;
-
-                    WeakClassifier c1 = new WeakClassifier(threshold, false, n);  // classify point with value < threshold as -1
-                    double c1Error = 0;
-                    for (int trainingDatumID = 0; trainingDatumID < sortedFeatures[n].length; trainingDatumID++) {
-                        if (sortedFeatures[n][trainingDatumID] < threshold) { // classify -1
-                            if (labels[trainingDatumID] == 1) {
-                                c1Error += distribution[trainingDatumID];
-                            }
-                        } else {  // classify +1
-                            if (labels[trainingDatumID] == -1) {
-                                c1Error += distribution[trainingDatumID];
-                            }
-                        }
-                    }
-                    if (c1Error < smallestError) {
-                        baseClassifier = c1;
-                        smallestError = c1Error;
-                    }
-
-                    WeakClassifier c2 = new WeakClassifier(threshold, true, n);  // classify point with value < threshold as +1
-                    double c2Error = 0;
-                    for (int trainingDatumID = 0; trainingDatumID < sortedFeatures[n].length; trainingDatumID++) {
-                        if (sortedFeatures[n][trainingDatumID] < threshold) { // classify +1
-                            if (labels[trainingDatumID] == -1) {
-                                c2Error += distribution[trainingDatumID];
-                            }
-                        } else {  // classify -1
-                            if (labels[trainingDatumID] == 1) {
-                                c2Error += distribution[trainingDatumID];
-                            }
-                        }
-                    }
-                    if (c2Error < smallestError) {
-                        baseClassifier = c2;
-                        smallestError = c2Error;
-                    }
-                }
-            }
-        }
-
-        baseClassifier.error = smallestError;
-        baseClassifier.normalizingFactor = 2 * Math.sqrt(smallestError * (1D - smallestError));
-        baseClassifier.alpha = 0.5 * Math.log((1D - smallestError) / smallestError);
-        if (baseClassifier.alpha < 0) {
-            System.err.println("Error: alpha < 0");
-            System.exit(1);
-        }
-        return baseClassifier;
-    }
-
     public void displayAccuracy(double[][] features, double[] labels) {
         if (weakClassifiers == null || weakClassifiers.size() == 0) {
             System.out.println("Need training before prediction.");
@@ -212,7 +204,7 @@ public class AdaBoost {
             }
         }
         double accuracy = numCorrectPrediction * 100 / numData;
-        System.out.println(numCorrectPrediction + " / " + numData + " correctly predicted.");
+        System.out.println((int)numCorrectPrediction + " / " + numData + " correctly predicted.");
         System.out.println("Accuracy: " + accuracy + " %");
     }
 
