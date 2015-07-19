@@ -1,8 +1,6 @@
 package AdaBoost;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Thanakorn on 7/18/15.
@@ -101,10 +99,11 @@ public class AdaBoost {
         double smallestError = Double.MAX_VALUE;
 
         for (int n = 0; n < sortedFeatures.length; n++) {
-            for (int m = 1; m < sortedFeatures[n].length; m++) {
-                if (sortedFeatures[n][m] != sortedFeatures[n][m-1]) {
-                    double threshold = (sortedFeatures[n][m] + sortedFeatures[n][m-1]) / 2;
-
+            Set<Double> visitedThresholds = new HashSet<>();
+            for (int m = 0; m < sortedFeatures[n].length; m++) {
+                double threshold = sortedFeatures[n][m];
+                if (!visitedThresholds.contains(threshold)) {
+                    visitedThresholds.add(threshold);
                     WeakClassifier c1 = new WeakClassifier(threshold, false, n);  // classify point with value < threshold as -1
                     double c1Error = 0;
                     for (int trainingDatumID = 0; trainingDatumID < sortedFeatures[n].length; trainingDatumID++) {

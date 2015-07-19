@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Thanakorn on 7/18/15.
  */
@@ -17,8 +20,25 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     public static int lengthOfLongestSubstring(String s) {
+        if (s.isEmpty()) {
+            return 0;
+        }
 
+        Map<Character, Integer> lastIndex = new HashMap<>();
+        int maxLen = 1;
+        int startIndex = 0;
 
-        return 0;
+        for (int i = 0; i < s.length(); i++) {
+            char curChar = s.charAt(i);
+            if (lastIndex.containsKey(curChar)) {
+                int lastIndexOfCurChar = lastIndex.get(curChar);
+                startIndex = Math.max(startIndex, lastIndexOfCurChar + 1);
+            }
+            maxLen = Math.max(maxLen, i - startIndex + 1);
+            lastIndex.put(curChar, i);
+        }
+
+        return maxLen;
     }
+
 }

@@ -35,6 +35,24 @@ public class AdaBoostMAIN {
         adaBoost.displayAccuracy(trainingFeatures, trainingLabels);
         adaBoost.displayAccuracy(testFeatures, testLabels);
 
+        runXORProblem();
+    }
+
+    public static void runXORProblem() {
+        double[] x1 = new double[] {0,0};
+        double[] x2 = new double[] {0,1};
+        double[] x3 = new double[] {1,1};
+        double[] x4 = new double[] {1,0};
+        double[] labels = new double[] {0, 1, 0, 1};
+        double[][] features = new double[4][2];
+        features[0] = x1;
+        features[1] = x2;
+        features[2] = x3;
+        features[3] = x4;
+
+        AdaBoost adaBoost = new AdaBoost();
+        adaBoost.train(features, labels, 10);
+        adaBoost.displayAccuracy(features, labels);
     }
 
     public static void loadFeatures() {
