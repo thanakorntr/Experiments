@@ -13,7 +13,7 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        int[] a = new int[0];
+        System.out.println(Integer.parseInt("1234", 4));
 
     }
 
