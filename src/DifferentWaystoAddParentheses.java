@@ -9,7 +9,9 @@ public class DifferentWaystoAddParentheses {
     public static void main(String[] args) {
 
         String input1 = "2-1-1";
+        input1 = "5*4-2+50-2+4";
         List<Integer> ans = diffWaysToCompute(input1);  // 0,2
+
         System.out.println(ans.toString());
 
     }
