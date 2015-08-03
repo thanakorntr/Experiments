@@ -9,10 +9,6 @@ public class RepeatedDNASequences {
         String s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
         List<String> repeatedDNA = findRepeatedDnaSequences(s);
         System.out.println(repeatedDNA.toString());
-//        String a = "ABC";
-//        String b = "ABC";
-//        System.out.println(a.hashCode());
-//        System.out.println(b.hashCode());
     }
 
     public static List<String> findRepeatedDnaSequences(String s) {
@@ -21,26 +17,33 @@ public class RepeatedDNASequences {
             return ans;
         }
 
-        Map<Integer, Integer> visitedHash = new HashMap<>();
+        Map<Character, Integer> charMap = new HashMap<>();
+        charMap.put('A', 0);
+        charMap.put('T', 1);
+        charMap.put('C', 2);
+        charMap.put('G', 3);
 
-        int endIndex = 10;
-        for (int startIndex = 0; endIndex <= s.length(); startIndex++, endIndex++) {
-            String subStr = s.substring(startIndex, endIndex);
-            if (!visitedHash.containsKey(subStr.hashCode())) {
-                visitedHash.put(subStr.hashCode(), 1);
+        Set<Integer> visitedHashes = new HashSet<>();
+        Set<Integer> addedHashes = new HashSet<>();
+
+        int hash = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i < 9) {
+                hash = (hash << 2) + charMap.get(s.charAt(i));
             } else {
-                visitedHash.put(subStr.hashCode(), 2);
+                hash = (hash << 2) + charMap.get(s.charAt(i));
+                hash = hash & (1 << 20) - 1;
+                if (!visitedHashes.contains(hash)) {
+                    visitedHashes.add(hash);
+                } else {
+                    if (!addedHashes.contains(hash)) {
+                        addedHashes.add(hash);
+                        ans.add(s.substring(i-9, i+1));
+                    }
+                }
             }
         }
 
-        endIndex = 10;
-        for (int startIndex = 0; endIndex <= s.length(); startIndex++, endIndex++) {
-            String subStr = s.substring(startIndex, endIndex);
-            int hashCode = subStr.hashCode();
-            if (visitedHash.get(hashCode) > 1) {
-                ans.add(subStr);
-            }
-        }
 
         return ans;
     }
