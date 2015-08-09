@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -13,10 +15,12 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        int a = 1;
-        a = (a << 20) - 1;
-        System.out.println(Integer.bitCount(a));
-
+        List<String> list = Arrays.asList("a", "b", "c", "d", "e", "f");
+        list.parallelStream().forEach(x -> System.out.println(x));
+        String[] stringArr = { "a", "b", "c", "d" };
+        Stream<String> stream = Stream.of(stringArr);
+        String[] arr = stream.toArray(size -> new String[size]);
+        System.out.println(Arrays.toString(arr));
     }
 
 
