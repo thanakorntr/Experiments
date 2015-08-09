@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -13,7 +12,16 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        System.out.println("1");
+        Set<List<Integer>> set = new HashSet<>();
+        List<Integer> l1 = Arrays.asList(2);
+        set.add(l1);
+        List<Integer> l2 = Arrays.asList(2);
+        if (set.contains(l2)) {
+            System.out.println("sss");
+        }
+        if (l1 == l2) {
+            System.out.println("abc");
+        }
     }
 
 
