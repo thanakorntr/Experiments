@@ -12,16 +12,11 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        Set<List<Integer>> set = new HashSet<>();
-        List<Integer> l1 = Arrays.asList(2);
-        set.add(l1);
-        List<Integer> l2 = Arrays.asList(2);
-        if (set.contains(l2)) {
-            System.out.println("sss");
-        }
-        if (l1 == l2) {
-            System.out.println("abc");
-        }
+        int[] a = {1,2,3};
+        ArrayContainer ac = new ArrayContainer(a, 0);
+        ac.arr[0] = 2;
+        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(ac.arr));
     }
 
 
