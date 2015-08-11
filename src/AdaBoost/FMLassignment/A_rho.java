@@ -71,7 +71,7 @@ public class A_rho {
 				double validation_error = calculateValidationError(H_t,0);
 				cv_errors[k] = validation_error;
 				System.out.println("Validation error = "+validation_error);
-				System.out.println("Test error = "+test_error);
+				System.out.println("LeetCode.Test error = "+test_error);
 				
 			}
 			double avg_test_error = getMean(test_errors);
@@ -120,7 +120,7 @@ public class A_rho {
 					double validation_error = calculateValidationError(H_t,rho_values[j]);
 					cv_errors[k] = validation_error;
 					System.out.println("Validation error = "+validation_error);
-					System.out.println("Test error = "+test_error);
+					System.out.println("LeetCode.Test error = "+test_error);
 				}
 				double avg_test_error = getMean(test_errors);
 				double std_test_error = getStd(test_errors);
