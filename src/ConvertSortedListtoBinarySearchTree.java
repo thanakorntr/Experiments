@@ -23,7 +23,7 @@
 public class ConvertSortedListtoBinarySearchTree {
 
     public static void main(String[] args) {
-        System.out.println("LOL");
+
     }
 
     public static TreeNode sortedListToBST(ListNode head) {
