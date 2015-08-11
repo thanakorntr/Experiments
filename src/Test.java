@@ -12,7 +12,11 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        System.out.println("1");
+        int[] a = {1,2,3};
+        ArrayContainer ac = new ArrayContainer(a, 0);
+        ac.arr[0] = 2;
+        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(ac.arr));
     }
 
 
