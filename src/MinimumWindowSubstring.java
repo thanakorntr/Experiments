@@ -9,6 +9,8 @@ public class MinimumWindowSubstring {
         String t = "ABC";
         System.out.println(minWindow(s, t));
 
+
+        System.out.println("LOL");
     }
 
     public static String minWindow(String s, String t) {
