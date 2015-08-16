@@ -22,16 +22,40 @@ package LeetCode; /**
 
 public class ConvertSortedListtoBinarySearchTree {
 
+    public static ListNode h;
+
     public static void main(String[] args) {
 
     }
 
-    public static TreeNode sortedListToBST(ListNode head) {
+    public TreeNode sortedListToBST(ListNode head) {
         if (head == null) {
             return null;
         }
 
+        int count = 0;
+        ListNode tmp = head;
+        while (tmp != null) {
+            count++;
+            tmp = tmp.next;
+        }
 
-        return null;
+        h = head;
+        return sortedListToBSTHelper(0, count-1);
+    }
+
+    public TreeNode sortedListToBSTHelper(int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        int mid = (end + start) / 2;
+        TreeNode left = sortedListToBSTHelper(start, mid-1);
+        TreeNode root = new TreeNode(h.val);
+        root.left = left;
+        h = h.next;
+        root.right = sortedListToBSTHelper(mid+1, end);
+
+        return root;
     }
 }
