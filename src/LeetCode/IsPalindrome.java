@@ -16,7 +16,7 @@ public class IsPalindrome {
             palindrome = palindrome*10 + lastDigit;
             tmp = tmp / 10;
         }
-        
+
         return palindrome == x;
     }
 
