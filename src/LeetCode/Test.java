@@ -14,7 +14,17 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        System.out.println(Integer.parseInt("00"));
+
+        StringBuilder sb = new StringBuilder();
+        long t0 = System.currentTimeMillis();
+        for (int i = 0; i < 100000000; i++) {
+            //sb.insert(sb.length(), 'a');
+            sb.append('a');
+        }
+        long t1 = System.currentTimeMillis();
+        System.out.println((t1-t0)*Math.pow(10,-3));
+
+
     }
 
 
