@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.Arrays;
+
 /**
  * Created by Thanakorn on 8/22/15.
  *
@@ -18,33 +20,54 @@ public class NextPermutation {
 
     public static void main(String[] args) {
 
+        int[] nums = {1,3,2};
+        nextPermutation(nums);  // [2,1,3]
+        System.out.println(Arrays.toString(nums));
+        nums = new int[]{2,3,1};
+        nextPermutation(nums);  // [3,1,2]
+        System.out.println(Arrays.toString(nums));
+
     }
 
-    // 2 7 6 5 3 4
     public static void nextPermutation(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return;
         }
 
-        int i1 = -1, i2 = -1;
+        int startIndex = -1;
         for (int i = nums.length-2; i >= 0; i--) {
-            for (int j = nums.length-1; j > i; j--) {
-                if (nums[i] < nums[j]) {
-                    int tmp = nums[i];
-                    nums[i] = nums[j];
-                    nums[j] = tmp;
-                    return;
-                }
+            if (nums[i] < nums[i+1]) {
+                startIndex = i;
+                break;
             }
         }
 
-        int left = 0, right = nums.length-1;
+        if (startIndex == -1) {
+            reverse(nums, 0, nums.length-1);
+            return;
+        }
+
+        for (int i = nums.length-1; i > startIndex; i--) {
+            if (nums[i] > nums[startIndex]) {
+                swap(nums, startIndex, i);
+                reverse(nums, startIndex+1, nums.length-1);
+                return;
+            }
+        }
+    }
+
+    public static void reverse(int[] nums, int left, int right) {
+        if (left >= right) return;
         while (left < right) {
-            int tmp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = tmp;
+            swap(nums, left, right);
             left++;
             right--;
         }
+    }
+
+    public static void swap(int[] nums, int i1, int i2) {
+        int tmp = nums[i1];
+        nums[i1] = nums[i2];
+        nums[i2] = tmp;
     }
 }
