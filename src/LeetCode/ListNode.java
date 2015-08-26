@@ -10,10 +10,20 @@ public class ListNode {
         val = x;
     }
 
-    public static void print(ListNode head) {
-        while (head != null) {
-            System.out.println(head.val);
+    public static void printListnode(ListNode head) {
+        if (head == null) return;
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while (head.next != null) {
+            stringBuilder.append(head.val).append("->");
             head = head.next;
         }
+
+        if (head != null) {
+            stringBuilder.append(head.val);
+        }
+
+        System.out.println(stringBuilder.toString());
     }
 }
