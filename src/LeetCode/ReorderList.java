@@ -16,8 +16,8 @@ public class ReorderList {
 
         reorderList(n1);
 
-        ListNode.print(n1);
-        ListNode.print(n1);
+        ListNode.printListnode(n1);
+        ListNode.printListnode(n1);
     }
 
 

@@ -15,15 +15,10 @@ public class Test {
 
     public static void main(String[] args) {
 
-        StringBuilder sb = new StringBuilder();
-        long t0 = System.currentTimeMillis();
-        for (int i = 0; i < 100000000; i++) {
-            //sb.insert(sb.length(), 'a');
-            sb.append('a');
-        }
-        long t1 = System.currentTimeMillis();
-        System.out.println((t1-t0)*Math.pow(10,-3));
-
+        int a = 859963392;
+        System.out.println(2*a);
+        System.out.println(3*a);
+        System.out.println(5*a);
 
     }
 
