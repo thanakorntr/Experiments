@@ -1,6 +1,7 @@
 package LeetCode;
 
-import java.util.*;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -15,11 +16,17 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int a = 859963392;
-        System.out.println(2*a);
-        System.out.println(3*a);
-        System.out.println(5*a);
-
+        int a = -2;
+        int b = a >> 1;
+        int c = a >>> 1;
+        System.out.println(Integer.toBinaryString(a));
+        System.out.println(Integer.toBinaryString(b));
+        System.out.println(Integer.toBinaryString(c));
+        System.out.println(Integer.toBinaryString(2));
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
     }
 
 
