@@ -15,18 +15,10 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
+        int a = 2, b = 3;
+        double c = (double)a / b;
 
-        int a = -2;
-        int b = a >> 1;
-        int c = a >>> 1;
-        System.out.println(Integer.toBinaryString(a));
-        System.out.println(Integer.toBinaryString(b));
-        System.out.println(Integer.toBinaryString(c));
-        System.out.println(Integer.toBinaryString(2));
-        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
-        System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println(Integer.MIN_VALUE);
+        System.out.println(c);
     }
 
 
