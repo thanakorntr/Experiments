@@ -15,10 +15,8 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        int a = 2, b = 3;
-        double c = (double)a / b;
-
-        System.out.println(c);
+        StringBuilder sb = new StringBuilder();
+        sb.substring(1,2);
     }
 
 
