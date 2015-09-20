@@ -1,5 +1,7 @@
 package LeetCode;
 
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,10 +17,37 @@ public class Test {
     private Stack<Integer> curStack = s1;
 
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder();
-        sb.substring(1,2);
+
+        Hashtable<Integer, Integer> a = new Hashtable<>();
+        HashMap<Integer, Integer> b = new HashMap<>();
+//        List<Integer> l = new ArrayList<>();
+//        for (int i = 1; i <= 10000000; i++) {
+//            l.add(i);
+//        }
+//        long t0 = System.currentTimeMillis();
+//        l.parallelStream().map(x -> x.toString()+"0").collect(Collectors.toList());
+//        long t1 = System.currentTimeMillis();
+//
+//        System.out.println((t1-t0)*Math.pow(10, -3) + " secs");
     }
 
+    private static int IOB2(int[] nums) {
+        try {
+            int a = IOB(nums);
+            return a;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static int IOB(int[] nums) {
+        try {
+            int lastNum = nums[3];
+            return lastNum;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
 
     public static void printListNodes(ListNode head) {
         if (head == null) {
