@@ -1,7 +1,6 @@
 package LeetCode;
 
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -18,8 +17,11 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Hashtable<Integer, Integer> a = new Hashtable<>();
-        HashMap<Integer, Integer> b = new HashMap<>();
+        int[] a = new int[]{1,2,3};
+        int[] b = a;
+        b[1] = 22;
+        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(b));
 //        List<Integer> l = new ArrayList<>();
 //        for (int i = 1; i <= 10000000; i++) {
 //            l.add(i);
