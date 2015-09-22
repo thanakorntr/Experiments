@@ -1,6 +1,5 @@
 package LeetCode;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -17,20 +16,24 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] a = new int[]{1,2,3};
-        int[] b = a;
-        b[1] = 22;
-        System.out.println(Arrays.toString(a));
-        System.out.println(Arrays.toString(b));
-//        List<Integer> l = new ArrayList<>();
-//        for (int i = 1; i <= 10000000; i++) {
-//            l.add(i);
-//        }
-//        long t0 = System.currentTimeMillis();
-//        l.parallelStream().map(x -> x.toString()+"0").collect(Collectors.toList());
-//        long t1 = System.currentTimeMillis();
-//
-//        System.out.println((t1-t0)*Math.pow(10, -3) + " secs");
+        int[] nums = {2,3,4,5,6,1};
+        System.out.println(startIndex(nums)); // 3
+    }
+
+    private static int startIndex(int[] nums) {
+        int left = 0, right = nums.length-1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (mid < nums.length - 1 && nums[mid] > nums[mid+1]) {
+                return mid;
+            } else if (nums[left] < nums[mid]) {
+                left = mid+1;
+            } else {
+                right = mid-1;
+            }
+        }
+
+        return left;
     }
 
     private static int IOB2(int[] nums) {
