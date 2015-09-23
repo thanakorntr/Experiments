@@ -51,10 +51,6 @@ public class SlidingWindowUnique {
 
         for (int i = windowSize; i < nums.length; i++) {
             int firstNumInPrevWindow = nums[i - windowSize];
-            if (firstNumInPrevWindow == nums[i]) {
-                sumUnique += curUniqueNum;
-                continue;
-            }
 
             if (intMap.get(firstNumInPrevWindow) == 1) {
                 curUniqueNum--;
@@ -76,6 +72,7 @@ public class SlidingWindowUnique {
                 }
                 intMap.put(newNum, intMap.get(newNum) + 1);
             }
+
 
             sumUnique += curUniqueNum;
         }
