@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.List;
 import java.util.Stack;
+import java.util.TreeSet;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -16,8 +17,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] nums = {2,3,4,5,6,1};
-        System.out.println(startIndex(nums)); // 3
+        TreeSet<Integer> s = new TreeSet<>();
+        s.add(1);
+        s.add(1);
+        System.out.println(s.size());
+        s.remove(1);
+        System.out.println(s.size());
     }
 
     private static int startIndex(int[] nums) {
