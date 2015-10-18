@@ -1,8 +1,9 @@
 package LeetCode;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
-import java.util.TreeSet;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -17,12 +18,65 @@ public class Test {
 
     public static void main(String[] args) {
 
-        TreeSet<Integer> s = new TreeSet<>();
-        s.add(1);
-        s.add(1);
-        System.out.println(s.size());
-        s.remove(1);
-        System.out.println(s.size());
+        int[] nums = generateRandomTest();
+        System.out.println(dpLIS(nums));
+        System.out.println(bruteForceLIS(nums));
+        System.out.println(Arrays.toString(nums));
+    }
+
+    private static Collection<Integer[]> tt() {
+        Integer[] a = new Integer[3];
+        return Arrays.asList(a,a,a,a);
+    }
+
+    private static int[] generateRandomTest() {
+        int[] nums = new int[10];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = (int)(10 * Math.random()) + 1;
+        }
+        return nums;
+    }
+
+    private static int dpLIS(int[] nums) {
+
+        int maxLen = 1;
+        int[] lisArray = new int[nums.length];
+        lisArray[0] = 1;
+
+        for (int i = 1; i < nums.length; i++) {
+            int tmpLen = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) {
+                    tmpLen = Math.max(tmpLen, lisArray[j] + 1);
+                }
+            }
+            lisArray[i] = tmpLen;
+            maxLen = Math.max(maxLen, tmpLen);
+        }
+
+        return maxLen;
+    }
+
+    private static int bruteForceLIS(int[] nums) {
+
+        int maxLen = 1;
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i+1; j < nums.length; j++) {
+                int curLen = 1;
+                int lastNum = nums[i];
+                for (int k = i; k <= j; k++) {
+                    if (nums[k] > lastNum) {
+                        lastNum = nums[k];
+                        curLen++;
+                    }
+                }
+                maxLen = Math.max(maxLen, curLen);
+            }
+        }
+
+        return maxLen;
+
     }
 
     private static int startIndex(int[] nums) {
