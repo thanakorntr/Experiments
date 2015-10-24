@@ -1,9 +1,6 @@
 package LeetCode;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Thanakorn on 5/28/15.
@@ -18,10 +15,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] nums = generateRandomTest();
-        System.out.println(dpLIS(nums));
-        System.out.println(bruteForceLIS(nums));
-        System.out.println(Arrays.toString(nums));
+        List<Integer> nums = Arrays.asList(1,2);
+        Iterator<Integer> iterator = nums.iterator();
+
+        System.out.println(iterator.next());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
     }
 
     private static Collection<Integer[]> tt() {
