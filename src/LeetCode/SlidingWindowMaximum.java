@@ -1,7 +1,7 @@
 package LeetCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Created by Thanakorn on 8/29/15.
@@ -37,53 +37,47 @@ import java.util.List;
  */
 public class SlidingWindowMaximum {
 
-    private class MaxQueue {
-
-        private List<Integer> storage = new ArrayList<>();
-        private int maxIntIndex = -1;
-        private int startIndex = -1;
-
-        public int getMax() {
-            if (maxIntIndex == -1) {
-                throw new IndexOutOfBoundsException();
-            }
-            return storage.get(maxIntIndex);
-        }
-
-        public void push(int x) {
-            if (maxIntIndex == -1) {
-                maxIntIndex = 0;
-                startIndex = 0;
-                storage.add(x);
-                return;
-            }
-            storage.add(x);
-            if (x > getMax()) {
-                maxIntIndex = storage.size() - 1;
-            }
-        }
-
-        public int pop() {
-            if (startIndex == -1) {
-                throw new IndexOutOfBoundsException();
-            }
-            if (storage.get(startIndex) != getMax()) {
-                int popVal = storage.get(startIndex);
-                startIndex++;
-                return popVal;
-            }
-            return 0;
-        }
-    }
-
     public static void main(String[] args) {
+
+        Deque<Integer> q = new ArrayDeque<>();
+        q.addFirst(1);
+        q.addFirst(2);
+
 
     }
 
     public int[] maxSlidingWindow(int[] nums, int k) {
 
+        if (nums == null || nums.length == 0) {
+            return nums;
+        }
 
-        return null;
+        int[] maxValsInWindows = new int[nums.length - k + 1];
+        int maxValIndex = 0;
+
+        Deque<Integer> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int firstIndexInCurWindow = i - k + 1;
+
+            while (!deque.isEmpty() && deque.peekFirst() < firstIndexInCurWindow) {
+                deque.pollFirst();
+            }
+
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.pollLast();
+            }
+
+            deque.add(i);
+
+            if (i >= k - 1) {
+                maxValsInWindows[maxValIndex] = nums[deque.peekFirst()];
+                maxValIndex++;
+            }
+        }
+
+        return maxValsInWindows;
     }
 
 }
