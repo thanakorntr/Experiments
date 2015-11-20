@@ -27,7 +27,7 @@ public class AdditiveNumber {
 
     public static void main(String[] args) {
 
-        System.out.println(isAdditiveNumber("123"));
+        System.out.println(isAdditiveNumber("1023"));
 
     }
 
@@ -40,12 +40,19 @@ public class AdditiveNumber {
         int maxInitialFirstNum = (num.length() - 1) / 2;
 
         for (int firstNumEndIndex = 1; firstNumEndIndex <= maxInitialFirstNum; firstNumEndIndex++) {
+            String num1 = num.substring(0, firstNumEndIndex);
+            if (num1.length() > 1 && num1.startsWith("0")) {
+                return false;
+            }
             for (int secondNumEndIndex = firstNumEndIndex + 1;
                 Math.max(firstNumEndIndex, secondNumEndIndex - firstNumEndIndex) <= num.length() - secondNumEndIndex;
                  secondNumEndIndex++) {
 
-                String num1 = num.substring(0, firstNumEndIndex);
                 String num2 = num.substring(firstNumEndIndex, secondNumEndIndex);
+                if (num2.length() > 1 && num2.startsWith("0")) {
+                    continue;
+                }
+
                 String remainingNum = num.substring(secondNumEndIndex);
                 if (isAdditiveHelper(num1, num2,  remainingNum)) {
                     return true;
