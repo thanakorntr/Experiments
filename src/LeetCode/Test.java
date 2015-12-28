@@ -9,6 +9,10 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
 
+        int x = (int)Math.ceil(6D / 2);
+        System.out.println(x);
+
     }
+
 
 }

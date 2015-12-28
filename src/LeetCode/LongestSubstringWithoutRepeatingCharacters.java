@@ -17,6 +17,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
 
         String str = "abcabcbb";
+        str = "abba";
         System.out.println(lengthOfLongestSubstring(str));
 
     }
@@ -43,4 +44,28 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return maxLen;
     }
 
+    public static int lengthOfLongestSubstring2(String s) {
+        if (s.isEmpty()) {
+            return 0;
+        }
+
+        Map<Character, Integer> lastIndex = new HashMap<>();
+        int maxLen = 1;
+        int startIndex = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char curChar = s.charAt(i);
+            if (lastIndex.containsKey(curChar)) {
+                int lastIndexOfCurChar = lastIndex.get(curChar);
+                for (int j = startIndex; j <= lastIndexOfCurChar; j++) {
+                    lastIndex.remove(s.charAt(j));
+                }
+                startIndex = lastIndexOfCurChar + 1;
+            }
+            maxLen = Math.max(maxLen, i - startIndex + 1);
+            lastIndex.put(curChar, i);
+        }
+
+        return maxLen;
+    }
 }
