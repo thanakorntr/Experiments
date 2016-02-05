@@ -38,18 +38,18 @@ public class BinaryTreeFromPreorderInorder {
             inorderIndexMaps.put(inorder[i], i);
         }
 
-        return buildTreeHelper(preorder, inorder, 0, 0, inorder.length-1, inorderIndexMaps);
+        return buildTreeHelper(preorder, 0, 0, inorder.length-1, inorderIndexMaps);
     }
 
-    public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int preStart, int inStart, int inEnd, Map<Integer, Integer> inorderIndexMaps) {
+    public TreeNode buildTreeHelper(int[] preorder, int preStart, int inStart, int inEnd, Map<Integer, Integer> inorderIndexMaps) {
         if (inStart > inEnd || preStart < 0 || preStart >= preorder.length) {
             return null;
         }
 
         TreeNode root = new TreeNode(preorder[preStart]);
         int inorderIndex = inorderIndexMaps.get(preorder[preStart]);
-        TreeNode left = buildTreeHelper(preorder, inorder, preStart+1, inStart, inorderIndex-1, inorderIndexMaps);
-        TreeNode right = buildTreeHelper(preorder, inorder, preStart+inorderIndex-inStart+1, inorderIndex+1, inEnd, inorderIndexMaps);
+        TreeNode left = buildTreeHelper(preorder, preStart+1, inStart, inorderIndex-1, inorderIndexMaps);
+        TreeNode right = buildTreeHelper(preorder, preStart+inorderIndex-inStart+1, inorderIndex+1, inEnd, inorderIndexMaps);
         root.left = left;
         root.right = right;
 
