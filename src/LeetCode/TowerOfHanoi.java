@@ -35,7 +35,7 @@ public class TowerOfHanoi {
 //        cyclicToh(3, 'a', 'b', 'c');
 //        slowCyclicToh(3, 'a', 'b', 'c');
 
-        int n = 15;
+        int n = 3;
         StackWrapper<Character> A = getStackOfChars(RED, n, 'A');
         StackWrapper<Character> B = new StackWrapper<>('B');
         StackWrapper<Character> C = new StackWrapper<>('C');
@@ -52,9 +52,9 @@ public class TowerOfHanoi {
 //        slowRedToh3(n, A, B, C);
 
 //        whiteToh(n, A, B, C);
-        slowWhiteToh(n, A, B, C);
+//        slowWhiteToh(n, A, B, C);
 //        slowWhiteToh2(n, A, B, C);
-//        slowWhiteToh3(n, A, B, C);
+        slowWhiteToh3(n, A, B, C);
 
         stopwatch.elapsed(TimeUnit.MILLISECONDS);
         stopwatch.stop();
