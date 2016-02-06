@@ -13,12 +13,14 @@ public class TowerOfHanoi {
     private static final char RED = 'R';
     private static final char WHITE = 'W';
 
+    private static int count = 0;
+
     public static void main(String[] args) {
 //        toh4Peg(5, 'a', 'b', 'c', 'd');
 //        cyclicToh(3, 'a', 'b', 'c');
 //        slowCyclicToh(3, 'a', 'b', 'c');
 
-        int n = 25;
+        int n = 1;
         Stack<Character> A = getStackOfChars(RED, n);
         Stack<Character> B = new Stack<>();
         Stack<Character> C = new Stack<>();
@@ -29,7 +31,8 @@ public class TowerOfHanoi {
 //        redToh(n, A, B, C);
 //        slowRedToh(n, A, B, C);
 //        slowRedToh2(n, A, B, C);
-//        whiteToh(n, A, B, C);
+//        slowRedToh3(n, A, B, C);
+        whiteToh(n, A, B, C);
 //        slowWhiteToh(n, A, B, C);
 
         stopwatch.elapsed(TimeUnit.MILLISECONDS);
@@ -37,6 +40,7 @@ public class TowerOfHanoi {
         System.out.println(stopwatch);
 
         printStack(B);
+        System.out.println(count);
     }
 
     private static void toh4Peg(int n, char A, char B, char C, char D) {
@@ -158,6 +162,23 @@ public class TowerOfHanoi {
         slowRedToh2(n - 1, A, B, C);
     }
 
+    private static void slowRedToh3(int n, Stack<Character> A, Stack<Character> B, Stack<Character> C) {
+        if (n == 1) {
+            if (A.peek() == RED) {
+                moveFlippingDisc(A, C);
+                moveFlippingDisc(C, B);
+            } else {
+                moveFlippingDisc(A, B);
+            }
+            return;
+        }
+        toh(n - 1, A, B, C);
+        moveFlippingDisc(A, C);
+        toh(n - 1, B, A, C);
+        moveFlippingDisc(C, B);
+        slowRedToh3(n - 1, A, B, C);
+    }
+
     private static void whiteToh(int n, Stack<Character> A, Stack<Character> B, Stack<Character> C) {
         if (n == 1) {
             if (A.peek() == WHITE) {
@@ -197,6 +218,7 @@ public class TowerOfHanoi {
         } else {
             toStack.add(RED);
         }
+        count++;
     }
 
     private static Stack<Character> getStackOfChars(char c, int n) {
