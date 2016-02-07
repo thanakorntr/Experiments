@@ -39,15 +39,7 @@ class Ticket implements Comparator<Ticket> {
 public class ReconstructItinerary {
 
     public static void main(String[] args) {
-
-//        PriorityQueue<String> pq = new PriorityQueue<>();
-//        pq.add("C");
-//        pq.add("A");
-//        pq.add("B");
-//        for (String p : pq) {
-//            System.out.println(p);
-//        }
-
+        
         String[][] tickets = new String[][]{
                 {"JFK", "KUL"},
                 {"JFK", "NRT"},
