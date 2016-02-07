@@ -51,10 +51,10 @@ public class TowerOfHanoi {
 //        slowRedToh2(n, A, B, C);
 //        slowRedToh3(n, A, B, C);
 
-//        whiteToh(n, A, B, C);
+        whiteToh(n, A, B, C);
 //        slowWhiteToh(n, A, B, C);
 //        slowWhiteToh2(n, A, B, C);
-        slowWhiteToh3(n, A, B, C);
+//        slowWhiteToh3(n, A, B, C);
 
         stopwatch.elapsed(TimeUnit.MILLISECONDS);
         stopwatch.stop();
@@ -127,6 +127,9 @@ public class TowerOfHanoi {
     }
 
     private static void toh(int n, StackWrapper<Character> A, StackWrapper<Character> B, StackWrapper<Character> C) {
+        if (n < 1) {
+            return;
+        }
         if (n == 1) {
             moveFlippingDisc(A, B);
             return;
@@ -204,18 +207,26 @@ public class TowerOfHanoi {
                                         StackWrapper<Character> B,
                                         StackWrapper<Character> C) {
 
-        List<StackWrapper<Character>> threeStacks = getThreeStacks(A, B, C);
-
+        if (n < 1) {
+            return;
+        }
         if (n == 1) {
-
+            if (A.peek() == WHITE) {
+                moveFlippingDisc(A, C);
+                moveFlippingDisc(C, B);
+            } else {
+                moveFlippingDisc(A, B);
+            }
+            return;
         }
 
-        if (A == B) {
-
-        }
-
-        toh(n, A, B, C);
-        whiteToh(n - 1, B, B, C);
+        toh(n - 1, A, C, B);
+        moveFlippingDisc(A, B);
+        toh(n - 2, C, B, A);
+        moveFlippingDisc(C, A);
+        toh(n - 2, B, C, A);
+        moveFlippingDisc(A, B);
+        whiteToh(n - 2, C, B, A);
     }
 
     // 1: fromStack, 2: toStack, 3: otherStack
