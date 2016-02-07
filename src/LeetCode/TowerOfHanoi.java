@@ -2,8 +2,6 @@ package LeetCode;
 
 import com.google.common.base.Stopwatch;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
@@ -35,7 +33,7 @@ public class TowerOfHanoi {
 //        cyclicToh(3, 'a', 'b', 'c');
 //        slowCyclicToh(3, 'a', 'b', 'c');
 
-        int n = 3;
+        int n = 5;
         StackWrapper<Character> A = getStackOfChars(RED, n, 'A');
         StackWrapper<Character> B = new StackWrapper<>('B');
         StackWrapper<Character> C = new StackWrapper<>('C');
@@ -227,40 +225,6 @@ public class TowerOfHanoi {
         toh(n - 2, B, C, A);
         moveFlippingDisc(A, B);
         whiteToh(n - 2, C, B, A);
-    }
-
-    // 1: fromStack, 2: toStack, 3: otherStack
-    private static List<StackWrapper<Character>> getThreeStacks(StackWrapper<Character> stackOne,
-                                                          StackWrapper<Character> stackTwo,
-                                                          StackWrapper<Character> stackThree) {
-
-        List<StackWrapper<Character>> listStacks = new ArrayList<>();
-
-        if (stackOne != stackTwo) {
-            listStacks.add(stackOne);
-            listStacks.add(stackTwo);
-        }
-
-        char destinationStack = stackOne.stackName;
-        char otherStack = stackTwo.stackName;
-
-        StackWrapper<Character> hiddenStack = null;
-
-        if (destinationStack == 'A' && otherStack == 'B') {
-            hiddenStack = globalC;
-        } else if (destinationStack == 'A' && otherStack == 'C') {
-            hiddenStack = globalB;
-        } else if (destinationStack == 'B' && otherStack == 'A') {
-            hiddenStack = globalC;
-        } else if (destinationStack == 'B' && otherStack == 'C') {
-            hiddenStack = globalA;
-        } else if (destinationStack == 'C' && otherStack == 'A') {
-            hiddenStack = globalB;
-        } else if (destinationStack == 'C' && otherStack == 'B') {
-            hiddenStack = globalA;
-        }
-
-        return null;
     }
 
     private static void slowWhiteToh(int n, StackWrapper<Character> A, StackWrapper<Character> B, StackWrapper<Character> C) {
