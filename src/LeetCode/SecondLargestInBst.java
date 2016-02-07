@@ -14,6 +14,9 @@ public class SecondLargestInBst {
                 || (root.right == null && isLeaf(root.left))) {
             return root;
         }
+        if (root.left != null && isLeaf(root.left) && root.right != null && isLeaf(root.right)) {
+            return root;
+        }
 
         if (root.left == null) {
             return findSecondLargestInBst(root.right);

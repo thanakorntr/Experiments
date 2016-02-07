@@ -39,7 +39,7 @@ class Ticket implements Comparator<Ticket> {
 public class ReconstructItinerary {
 
     public static void main(String[] args) {
-        
+
         String[][] tickets = new String[][]{
                 {"JFK", "KUL"},
                 {"JFK", "NRT"},
