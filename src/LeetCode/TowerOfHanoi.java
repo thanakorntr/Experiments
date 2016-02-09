@@ -33,7 +33,7 @@ public class TowerOfHanoi {
 //        cyclicToh(3, 'a', 'b', 'c');
 //        slowCyclicToh(3, 'a', 'b', 'c');
 
-        int n = 5;
+        int n = 15;
         StackWrapper<Character> A = getStackOfChars(RED, n, 'A');
         StackWrapper<Character> B = new StackWrapper<>('B');
         StackWrapper<Character> C = new StackWrapper<>('C');
@@ -50,6 +50,7 @@ public class TowerOfHanoi {
 //        slowRedToh3(n, A, B, C);
 
         whiteToh(n, A, B, C);
+//        whiteToh2(n, A, B, C);
 //        slowWhiteToh(n, A, B, C);
 //        slowWhiteToh2(n, A, B, C);
 //        slowWhiteToh3(n, A, B, C);
@@ -225,6 +226,29 @@ public class TowerOfHanoi {
         toh(n - 2, B, C, A);
         moveFlippingDisc(A, B);
         whiteToh(n - 2, C, B, A);
+    }
+
+    private static void whiteToh2(int n, StackWrapper<Character> A,
+                                 StackWrapper<Character> B,
+                                 StackWrapper<Character> C) {
+
+        if (n < 1) {
+            return;
+        }
+        if (n == 1) {
+            if (A.peek() == WHITE) {
+                moveFlippingDisc(A, C);
+                moveFlippingDisc(C, B);
+            } else {
+                moveFlippingDisc(A, B);
+            }
+            return;
+        }
+
+        toh(n - 1, A, C, B);
+        moveFlippingDisc(A, B);
+        toh(n - 1, C, A, B);
+        whiteToh2(n - 1, A, B, C);
     }
 
     private static void slowWhiteToh(int n, StackWrapper<Character> A, StackWrapper<Character> B, StackWrapper<Character> C) {
