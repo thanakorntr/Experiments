@@ -33,7 +33,7 @@ public class TowerOfHanoi {
 //        cyclicToh(3, 'a', 'b', 'c');
 //        slowCyclicToh(3, 'a', 'b', 'c');
 
-        int n = 15;
+        int n = 25;
         StackWrapper<Character> A = getStackOfChars(RED, n, 'A');
         StackWrapper<Character> B = new StackWrapper<>('B');
         StackWrapper<Character> C = new StackWrapper<>('C');
