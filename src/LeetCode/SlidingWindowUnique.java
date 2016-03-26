@@ -35,47 +35,43 @@ public class SlidingWindowUnique {
         Map<Integer,Integer> intMap = new HashMap<>();
         int sumUnique = 0;
         int curUniqueNum = 0;
-        for (int i = 0; i < windowSize; i++) {
-            if (!intMap.containsKey(nums[i])) {
-                intMap.put(nums[i], 1);
-            } else {
-                intMap.put(nums[i], intMap.get(nums[i]) + 1);
-            }
-        }
-        for (int i : intMap.keySet()) {
-            if (intMap.get(i) == 1) {
-                sumUnique++;
-                curUniqueNum++;
-            }
-        }
 
-        for (int i = windowSize; i < nums.length; i++) {
-            int firstNumInPrevWindow = nums[i - windowSize];
-
-            if (intMap.get(firstNumInPrevWindow) == 1) {
-                curUniqueNum--;
-                intMap.remove(firstNumInPrevWindow);
-            } else if (intMap.get(firstNumInPrevWindow) == 2) {
-                curUniqueNum++;
-                intMap.put(firstNumInPrevWindow, 1);
-            } else {
-                intMap.put(firstNumInPrevWindow, intMap.get(firstNumInPrevWindow) - 1);
-            }
-
-            int newNum = nums[i];
-            if (!intMap.containsKey(newNum)) {
-                curUniqueNum++;
-                intMap.put(newNum, 1);
-            } else {
-                if (intMap.get(newNum) == 1) {
-                    curUniqueNum--;
+        for (int i = 0; i < nums.length; i++) {
+            if (i < windowSize) {
+                if (!intMap.containsKey(nums[i])) {
+                    intMap.put(nums[i], 1);
+                    curUniqueNum++;
+                } else {
+                    if (intMap.get(nums[i]) == 1) {
+                        curUniqueNum--;
+                    }
+                    intMap.put(nums[i], intMap.get(nums[i]) + 1);
                 }
-                intMap.put(newNum, intMap.get(newNum) + 1);
+            } else {
+                sumUnique += curUniqueNum;
+                int firstNumPrevWindow = nums[i - windowSize];
+                if (intMap.get(firstNumPrevWindow) == 1) {
+                    intMap.remove(firstNumPrevWindow);
+                    curUniqueNum--;
+                } else {
+                    if (intMap.get(firstNumPrevWindow) == 2) {
+                        curUniqueNum++;
+                    }
+                    intMap.put(firstNumPrevWindow, intMap.get(firstNumPrevWindow) - 1);
+                }
+                if (!intMap.containsKey(nums[i])) {
+                    intMap.put(nums[i], 1);
+                    curUniqueNum++;
+                } else {
+                    if (intMap.get(nums[i]) == 1) {
+                        curUniqueNum--;
+                    }
+                    intMap.put(nums[i], intMap.get(nums[i]) + 1);
+                }
             }
-
-
-            sumUnique += curUniqueNum;
         }
+
+        sumUnique += curUniqueNum;
 
         return sumUnique;
     }
