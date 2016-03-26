@@ -29,9 +29,6 @@ public class SearchInsertPosition {
                 if (mid == 0 || nums[mid - 1] < target) {
                     return mid;
                 }
-                if (nums[mid - 1] == target) {
-                    return mid - 1;
-                }
                 right = mid - 1;
             } else {
                 if (mid == nums.length - 1 || nums[mid + 1] >= target) {
