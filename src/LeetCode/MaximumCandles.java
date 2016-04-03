@@ -1,8 +1,6 @@
 package LeetCode;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by Thanakorn on 6/13/15.
@@ -18,39 +16,56 @@ You need to write a program to find out maximum number of days you can celebrate
 
 public class MaximumCandles {
 
-    public static void main(String[] args) {
-        int[] candleLens = {2,2,2};
+    private class CandleWrapper implements Comparable<CandleWrapper> {
 
-        System.out.println(getMaxDay(candleLens));
+        int len;
+
+        protected CandleWrapper(int len) {
+            this.len = len;
+        }
+
+        @Override
+        public int compareTo(CandleWrapper o) {
+            return Integer.compare(this.len, o.len);
+        }
+
     }
 
-    public static int getMaxDay(int[] candleLens) {
-        Queue<Integer> maxHeap = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                if (o1 > o2) {
-                    return -1;
-                } else if (o1 < o2) {
-                    return 1;
-                } else {
-                    return 0;
+    public static void main(String[] args) {
+        int[] candleLens = {2,2,2};
+        System.out.println(new MaximumCandles().getMaxDay(candleLens));
+    }
+
+    public int getMaxDay(int[] candleLens) {
+        Queue<CandleWrapper> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int candleLen : candleLens) {
+            if (candleLen > 0) {
+                CandleWrapper candleWrapper = new CandleWrapper(candleLen);
+                maxHeap.add(candleWrapper);
+            }
+        }
+        
+        int curDay = 1;
+
+        while (maxHeap.size() >= curDay) {
+            List<CandleWrapper> candleList = new ArrayList<>();
+
+            for (int i = 0; i < curDay; i++) {
+                CandleWrapper candleWrapper = maxHeap.poll();
+                candleWrapper.len = candleWrapper.len - 1;
+                if (candleWrapper.len > 0) {
+                    candleList.add(candleWrapper);
                 }
             }
-        });
 
-        for (Integer i : candleLens) {
-            maxHeap.add(i);
+            for (CandleWrapper candleWrapper : candleList) {
+                maxHeap.add(candleWrapper);
+            }
+
+            curDay++;
         }
 
-        int day = 0;
-
-        while (true) {
-
-
-
-            break;
-        }
-
-        return day;
+        return curDay - 1;
     }
 }
