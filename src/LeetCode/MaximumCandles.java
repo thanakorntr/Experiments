@@ -45,7 +45,7 @@ public class MaximumCandles {
                 maxHeap.add(candleWrapper);
             }
         }
-        
+
         int curDay = 1;
 
         while (maxHeap.size() >= curDay) {
