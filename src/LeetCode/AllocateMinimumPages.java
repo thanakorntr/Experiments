@@ -103,6 +103,7 @@ public class AllocateMinimumPages {
         allocations.get(startStudentIndex).add(pages[startPageIndex]);
         int max1 = minimumMaximumPageHelper(startPageIndex + 1, startStudentIndex + 1, pages, numStudents, allocations);
         int max2 = minimumMaximumPageHelper(startPageIndex + 1, startStudentIndex, pages, numStudents, allocations);
+        allocations.get(startStudentIndex).remove(allocations.get(startStudentIndex).size() - 1);
         return Math.min(max1, max2);
     }
 
