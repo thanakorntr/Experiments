@@ -59,7 +59,7 @@ public class AllocateMinimumPages {
     public static void main(String[] args) {
         int numStudents = 2;
         int[] numPages = new int[]{12, 34, 67, 90};
-        System.out.println(new AllocateMinimumPages().minimumMaximumPage(numPages, numStudents));
+        System.out.println(new AllocateMinimumPages().minimumMaximumPage(numPages, numStudents));  // 113
     }
 
     public int minimumMaximumPage(int[] pages, int numStudents) {
