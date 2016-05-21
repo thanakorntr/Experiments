@@ -2,11 +2,11 @@ package LeetCode;
 
 /**
  * Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
-
- For "(()", the longest valid parentheses substring is "()", which has length = 2.
-
- Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
- *
+ * <p>
+ * For "(()", the longest valid parentheses substring is "()", which has length = 2.
+ * <p>
+ * Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
+ * <p>
  * Created by Thanakorn on 5/21/16.
  */
 public class LongestValidParentheses {
@@ -30,7 +30,7 @@ public class LongestValidParentheses {
         dp[0] = 0;
         dp[1] = s.charAt(0) == '(' && s.charAt(1) == ')' ? 2 : 0;
         int longest = dp[1];
-        for  (int i = 2; i < s.length(); i++) {
+        for (int i = 2; i < s.length(); i++) {
             if (s.charAt(i) == ')') {
                 if (s.charAt(i - 1) == '(') {
                     dp[i] = dp[i - 2] + 2;
@@ -69,7 +69,7 @@ public class LongestValidParentheses {
             }
             int count = 1;
             for (int j = i + 1; j < s.length(); j++) {
-                if (s.charAt(j) ==  '(') {
+                if (s.charAt(j) == '(') {
                     count++;
                 } else {
                     count--;
