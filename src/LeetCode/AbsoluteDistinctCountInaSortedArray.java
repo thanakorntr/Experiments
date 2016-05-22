@@ -40,6 +40,9 @@ public class AbsoluteDistinctCountInaSortedArray {
                 right--;
                 count--;
             }
+            if (left == right) {
+                break;
+            }
 
             int sum = nums[left] + nums[right];
             if (sum == 0) {
