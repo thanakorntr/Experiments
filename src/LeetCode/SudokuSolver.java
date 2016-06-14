@@ -1,6 +1,8 @@
 package LeetCode;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Write a program to solve a Sudoku puzzle by filling the empty cells.
@@ -37,27 +39,73 @@ public class SudokuSolver {
         if (board == null || board.length != 9 || board[0].length != 9) {
             return;
         }
-        solveSudokuHelper(board);
+        solveSudokuHelper(board, 0);
     }
 
-    private boolean solveSudokuHelper(char[][] board) {
-        for (int i = 0; i < 9; i++) {
+    private boolean solveSudokuHelper(char[][] board, int row) {
+        for (int i = row; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '.') {
                     for (int num = 1; num <= 9; num++) {
                         char c = (char)('1' + (num - 1));
-                        if (isValidPlace(board, c, i, j)) {
-                            board[i][j] = c;
-                            if (solveSudokuHelper(board)) {
-                                return true;
-                            }
-                            board[i][j] = '.';
+                        if (!isValidPlace(board, c, i, j)) {
+                            continue;
+                        }
+                        board[i][j] = c;
+                        int nextRow = j < 8 ? row : row + 1;
+                        if (solveSudokuHelper(board, nextRow)) {
+                            return true;
                         }
                     }
+                    board[i][j] = '.';
                     return false;
                 }
             }
         }
+        return isValid(board);
+    }
+
+    private boolean isValid(char[][] board) {
+        for (int row = 0; row < 9; row++) {
+            Set<Character> visitedChar = new HashSet<>();
+            for (int col = 0; col < 9; col++) {
+                if (board[row][col] != '.') {
+                    if (visitedChar.contains(board[row][col])) {
+                        return false;
+                    }
+                    visitedChar.add(board[row][col]);
+                }
+            }
+        }
+
+        for (int col = 0; col < 9; col++) {
+            Set<Character> visitedChar = new HashSet<>();
+            for (int row = 0; row < 9; row++) {
+                if (board[row][col] != '.') {
+                    if (visitedChar.contains(board[row][col])) {
+                        return false;
+                    }
+                    visitedChar.add(board[row][col]);
+                }
+            }
+        }
+
+        for (int startRow = 0; startRow <= 6; startRow += 3) {
+            for (int startCol = 0; startCol <= 6; startCol += 3) {
+                Set<Character> visitedChar = new HashSet<>();
+                for (int row = startRow; row < startRow + 3; row++) {
+                    for (int col = startCol; col < startCol + 3; col++) {
+                        if (board[row][col] != '.') {
+                            if (visitedChar.contains(board[row][col])) {
+                                return false;
+                            }
+                            visitedChar.add(board[row][col]);
+                        }
+                    }
+                }
+            }
+        }
+
         return true;
     }
 
