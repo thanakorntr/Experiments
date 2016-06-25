@@ -44,7 +44,7 @@ public class CountPathWithKedges {
 
         int count = 0;
 
-        for (GraphNode child : from.children) {
+        for (GraphNode child : from.adjacentNodes) {
             if (!memo.containsKey(child) || !memo.get(child).containsKey(k - 1)) {
                 if (!memo.containsKey(child)) {
                     memo.put(child, new HashMap<>());
